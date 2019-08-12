@@ -12,4 +12,5 @@ var (
 	endpointMediaPosts = func(communityID int64) string {
 		return endpointBaseURL + fmt.Sprintf("v1/stream/community/%d/mediaTab", communityID)
 	}
+	endpointMe = endpointBaseURL + "v1/users/me"
 )

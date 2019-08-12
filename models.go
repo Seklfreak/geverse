@@ -64,17 +64,29 @@ type MediaCategory struct {
 	Name string `json:"name"`
 }
 
+type Me struct {
+	UserKey       string          `json:"userKey"`
+	FirstName     string          `json:"firstName"`
+	LastName      string          `json:"lastName"`
+	Email         string          `json:"email"`
+	MyCommunities []Community     `json:"myCommunities"`
+	Profiles      []CommunityUser `json:"profiles"`
+	SocialTypes   []interface{}   `json:"socialTypes"` // TODO: no example yet, did not want to connect my SNS accounts…
+	LanguageCode  string          `json:"languageCode"`
+}
+
 type Community struct {
-	ID                int      `json:"id"`
-	Name              string   `json:"name"`
-	Description       string   `json:"description"`
-	MemberCount       int      `json:"memberCount"`
-	HomeBannerImgPath string   `json:"homeBannerImgPath"`
-	IconImgPath       string   `json:"iconImgPath"`
-	BannerImgPath     string   `json:"bannerImgPath"`
-	Fullname          []string `json:"fullname"`
-	ShowMemberCount   bool     `json:"showMemberCount"`
-	FcMember          bool     `json:"fcMember"`
+	ID                    int      `json:"id"`
+	Name                  string   `json:"name"`
+	Description           string   `json:"description"`
+	MemberCount           int      `json:"memberCount"`
+	HomeBannerImgPath     string   `json:"homeBannerImgPath"`
+	IconImgPath           string   `json:"iconImgPath"`
+	BannerImgPath         string   `json:"bannerImgPath"`
+	Fullname              []string `json:"fullname"`
+	ShowMemberCount       bool     `json:"showMemberCount"`
+	FcMember              bool     `json:"fcMember"`
+	MembershipBenifitLink string   `json:"membershipBenefitLink"`
 }
 
 type CommunityUser struct {
@@ -84,6 +96,7 @@ type CommunityUser struct {
 	ProfileNickname string    `json:"profileNickname"`
 	ProfileImgPath  string    `json:"profileImgPath"`
 	Status          string    `json:"status"`
+	Grade           string    `json:"grade"`
 	Official        bool      `json:"official"`
 	FcMember        bool      `json:"fcMember"`
 	JoinedAt        time.Time `json:"joinedAt"`

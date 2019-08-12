@@ -9,9 +9,7 @@ import (
 )
 
 func (g *Geverse) GetMediaPosts(ctx context.Context, communityID int64) (*MediaPosts, error) {
-	endpoint := endpointMediaPosts(communityID)
-
-	req, err := g.newRequest(ctx, http.MethodGet, endpoint, nil)
+	req, err := g.newRequest(ctx, http.MethodGet, endpointMediaPosts(communityID), nil)
 	if err != nil {
 		return nil, err
 	}
