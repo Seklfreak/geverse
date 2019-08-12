@@ -8,8 +8,8 @@ import (
 	"net/http"
 )
 
-func (g *Geverse) GetArtistPosts(ctx context.Context, communityID int64) (*ArtistPosts, error) {
-	endpoint := endpointArtistPosts(communityID)
+func (g *Geverse) GetMediaPosts(ctx context.Context, communityID int64) (*MediaPosts, error) {
+	endpoint := endpointMediaPosts(communityID)
 
 	req, err := g.newRequest(ctx, http.MethodGet, endpoint, nil)
 	if err != nil {
@@ -31,7 +31,7 @@ func (g *Geverse) GetArtistPosts(ctx context.Context, communityID int64) (*Artis
 		return nil, err
 	}
 
-	var posts *ArtistPosts
+	var posts *MediaPosts
 	err = json.Unmarshal(data, &posts)
 
 	return posts, nil
