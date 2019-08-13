@@ -64,6 +64,14 @@ type MediaCategory struct {
 	Name string `json:"name"`
 }
 
+type Notice struct {
+	ID    int
+	Link  string
+	Label string
+	Title string
+	Date  time.Time
+}
+
 type Me struct {
 	UserKey       string          `json:"userKey"`
 	FirstName     string          `json:"firstName"`
