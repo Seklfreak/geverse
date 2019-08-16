@@ -1,4 +1,4 @@
-module geverse
+module github.com/Seklfreak/geverse
 
 go 1.12
 
