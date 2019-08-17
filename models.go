@@ -13,7 +13,7 @@ type ArtistPost struct {
 	ID                int64         `json:"id"`
 	CommunityUser     CommunityUser `json:"communityUser"`
 	Community         Community     `json:"community"`
-	CommunityTabID    int           `json:"communityTabId"`
+	CommunityTabID    int64         `json:"communityTabId"`
 	Type              string        `json:"type"`
 	Body              string        `json:"body"`
 	CommentCount      int           `json:"commentCount"`
@@ -34,13 +34,13 @@ type MediaPosts struct {
 	Medias          []MediaPost     `json:"medias"`
 	TotalCount      int             `json:"totalCount"`
 	IsEnded         bool            `json:"isEnded"`
-	LastID          int             `json:"lastId"`
+	LastID          int64           `json:"lastId"`
 	MediaCategories []MediaCategory `json:"mediaCategories"`
 }
 
 type MediaPost struct {
-	ID                 int       `json:"id"`
-	CommunityID        int       `json:"communityId"`
+	ID                 int64     `json:"id"`
+	CommunityID        int64     `json:"communityId"`
 	Body               string    `json:"body"`
 	Type               string    `json:"type"`
 	ThumbnailPath      string    `json:"thumbnailPath"`
@@ -60,12 +60,12 @@ type MediaPost struct {
 }
 
 type MediaCategory struct {
-	ID   int    `json:"id"`
+	ID   int64  `json:"id"`
 	Name string `json:"name"`
 }
 
 type Notice struct {
-	ID    int
+	ID    int64
 	Link  string
 	Label string
 	Title string
@@ -84,7 +84,7 @@ type Me struct {
 }
 
 type Community struct {
-	ID                    int      `json:"id"`
+	ID                    int64    `json:"id"`
 	Name                  string   `json:"name"`
 	Description           string   `json:"description"`
 	MemberCount           int      `json:"memberCount"`
@@ -98,9 +98,9 @@ type Community struct {
 }
 
 type CommunityUser struct {
-	ID              int       `json:"id"`
-	CommunityID     int       `json:"communityId"`
-	ArtistID        int       `json:"artistId"`
+	ID              int64     `json:"id"`
+	CommunityID     int64     `json:"communityId"`
+	ArtistID        int64     `json:"artistId"`
 	ProfileNickname string    `json:"profileNickname"`
 	ProfileImgPath  string    `json:"profileImgPath"`
 	Status          string    `json:"status"`
@@ -111,13 +111,13 @@ type CommunityUser struct {
 }
 
 type Video struct {
-	ID               int           `json:"id"`
+	ID               int64         `json:"id"`
 	ContentIndex     int           `json:"contentIndex"`
 	Playtime         int           `json:"playtime"`
 	ThumbnailImgPath string        `json:"thumbnailImgPath"`
 	ThumbnailWidth   int           `json:"thumbnailWidth"`
 	ThumbnailHeight  int           `json:"thumbnailHeight"`
-	CommunityID      int           `json:"communityId"`
+	CommunityID      int64         `json:"communityId"`
 	Status           string        `json:"status"`
 	HlsPath          string        `json:"hlsPath"`
 	DashPath         string        `json:"dashPath"`
@@ -130,7 +130,7 @@ type Video struct {
 }
 
 type Photo struct {
-	ID                  int    `json:"id"`
+	ID                  int64  `json:"id"`
 	ContentIndex        int    `json:"contentIndex"`
 	ThumbnailImgURL     string `json:"thumbnailImgUrl"`
 	ThumbnailImgWidth   int    `json:"thumbnailImgWidth"`

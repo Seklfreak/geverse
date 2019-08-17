@@ -46,7 +46,7 @@ func (g *Geverse) GetNotices(ctx context.Context, communityID int64) ([]Notice, 
 		noticeLinkParts := strings.Split(noticeLink, "/")
 		noticeLinkPartID := noticeLinkParts[len(noticeLinkParts)-1]
 
-		notice.ID, err = strconv.Atoi(noticeLinkPartID)
+		notice.ID, err = strconv.ParseInt(noticeLinkPartID, 10, 64)
 		if err != nil {
 			err = errors.Wrapf(err, "unexpected notice ID: %s", noticeLinkPartID)
 			return
