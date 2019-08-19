@@ -44,7 +44,7 @@ type MediaPost struct {
 	Body               string    `json:"body"`
 	Type               string    `json:"type"`
 	ThumbnailPath      string    `json:"thumbnailPath"`
-	Photos             Photo     `json:"photos"`
+	Photos             []Photo   `json:"photos"`
 	Video              Video     `json:"video,omitempty"`
 	Title              string    `json:"title"`
 	Level              string    `json:"level"`
