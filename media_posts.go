@@ -32,5 +32,7 @@ func (g *Geverse) GetMediaPosts(ctx context.Context, communityID int64) (*MediaP
 	var posts *MediaPosts
 	err = json.Unmarshal(data, &posts)
 
+	posts.absolutify()
+
 	return posts, nil
 }

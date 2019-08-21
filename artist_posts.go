@@ -32,5 +32,7 @@ func (g *Geverse) GetArtistPosts(ctx context.Context, communityID int64) (*Artis
 	var posts *ArtistPosts
 	err = json.Unmarshal(data, &posts)
 
+	posts.absolutify()
+
 	return posts, nil
 }

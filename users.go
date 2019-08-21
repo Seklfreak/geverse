@@ -32,5 +32,7 @@ func (g *Geverse) GetMe(ctx context.Context) (*Me, error) {
 	var me *Me
 	err = json.Unmarshal(data, &me)
 
+	me.absolutify()
+
 	return me, nil
 }

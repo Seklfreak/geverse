@@ -2,9 +2,11 @@ package geverse
 
 import (
 	"fmt"
+	"strings"
 )
 
 var (
+	endpointCDNBaseURL    = "https://cdn-contents.weverse.io/"
 	endpointBaseURL       = "https://weverseapi.weverse.io/"
 	endpointStaticBaseURL = endpointBaseURL + "static/"
 	endpointAPIBaseURL    = endpointBaseURL + "api/"
@@ -21,3 +23,15 @@ var (
 
 	endpointMe = endpointAPIBaseURL + "v1/users/me"
 )
+
+func absolutify(path string) string {
+	if path == "" {
+		return " "
+	}
+
+	if strings.HasPrefix(path, "http") {
+		return path
+	}
+
+	return endpointCDNBaseURL + strings.TrimLeft(path, "/")
+}

@@ -9,6 +9,16 @@ type ArtistPosts struct {
 	IsEnded bool         `json:"isEnded"`
 }
 
+func (ap *ArtistPosts) absolutify() {
+	if ap == nil {
+		return
+	}
+
+	for i := range ap.Posts {
+		ap.Posts[i].absolutify()
+	}
+}
+
 type ArtistPost struct {
 	ID                int64         `json:"id"`
 	CommunityUser     CommunityUser `json:"communityUser"`
@@ -30,12 +40,36 @@ type ArtistPost struct {
 	IsHotTrendingPost bool          `json:"isHotTrendingPost"`
 }
 
+func (ap *ArtistPost) absolutify() {
+	if ap == nil {
+		return
+	}
+
+	ap.Community.absolutify()
+	for i := range ap.Photos {
+		ap.Photos[i].absolutify()
+	}
+}
+
 type MediaPosts struct {
 	Medias          []MediaPost     `json:"medias"`
 	TotalCount      int             `json:"totalCount"`
 	IsEnded         bool            `json:"isEnded"`
 	LastID          int64           `json:"lastId"`
 	MediaCategories []MediaCategory `json:"mediaCategories"`
+}
+
+func (mp *MediaPosts) absolutify() {
+	if mp == nil {
+		return
+	}
+
+	for i := range mp.Medias {
+		mp.Medias[i].absolutify()
+	}
+	for i := range mp.MediaCategories {
+		mp.MediaCategories[i].absolutify()
+	}
 }
 
 type MediaPost struct {
@@ -56,12 +90,27 @@ type MediaPost struct {
 	HasMyLike          bool      `json:"hasMyLike"`
 	CreatedAt          time.Time `json:"createdAt"`
 	ExtVideoPath       string    `json:"extVideoPath,omitempty"`
-	YoutubeID          string    `json:"youtubeId,omitempty"`
+	YouTubeID          string    `json:"youtubeId,omitempty"`
+}
+
+func (mp *MediaPost) absolutify() {
+	if mp == nil {
+		return
+	}
+
+	mp.ThumbnailPath = absolutify(mp.ThumbnailPath)
+	for i := range mp.Photos {
+		mp.Photos[i].absolutify()
+	}
+	mp.Video.absolutify()
 }
 
 type MediaCategory struct {
 	ID   int64  `json:"id"`
 	Name string `json:"name"`
+}
+
+func (mc *MediaCategory) absolutify() {
 }
 
 type Notice struct {
@@ -70,6 +119,9 @@ type Notice struct {
 	Label string
 	Title string
 	Date  time.Time
+}
+
+func (n *Notice) absolutify() {
 }
 
 type Me struct {
@@ -81,6 +133,19 @@ type Me struct {
 	Profiles      []CommunityUser `json:"profiles"`
 	SocialTypes   []interface{}   `json:"socialTypes"` // TODO: no example yet, did not want to connect my SNS accounts…
 	LanguageCode  string          `json:"languageCode"`
+}
+
+func (m *Me) absolutify() {
+	if m == nil {
+		return
+	}
+
+	for i := range m.MyCommunities {
+		m.MyCommunities[i].absolutify()
+	}
+	for i := range m.Profiles {
+		m.Profiles[i].absolutify()
+	}
 }
 
 type Community struct {
@@ -97,6 +162,16 @@ type Community struct {
 	MembershipBenifitLink string   `json:"membershipBenefitLink"`
 }
 
+func (c *Community) absolutify() {
+	if c == nil {
+		return
+	}
+
+	c.HomeBannerImgPath = absolutify(c.HomeBannerImgPath)
+	c.IconImgPath = absolutify(c.IconImgPath)
+	c.BannerImgPath = absolutify(c.BannerImgPath)
+}
+
 type CommunityUser struct {
 	ID              int64     `json:"id"`
 	CommunityID     int64     `json:"communityId"`
@@ -108,6 +183,14 @@ type CommunityUser struct {
 	Official        bool      `json:"official"`
 	FcMember        bool      `json:"fcMember"`
 	JoinedAt        time.Time `json:"joinedAt"`
+}
+
+func (cu *CommunityUser) absolutify() {
+	if cu == nil {
+		return
+	}
+
+	cu.ProfileImgPath = absolutify(cu.ProfileImgPath)
 }
 
 type Video struct {
@@ -126,7 +209,18 @@ type Video struct {
 	VideoHeight      int           `json:"videoHeight"`
 	Level            string        `json:"level"`
 	IsVertical       bool          `json:"isVertical"`
-	CaptionS3Paths   []interface{} `json:"captionS3Paths"`
+	CaptionS3Paths   []interface{} `json:"captionS3Paths"` // TODO: example?, probably strings?
+}
+
+func (v *Video) absolutify() {
+	if v == nil {
+		return
+	}
+
+	v.ThumbnailImgPath = absolutify(v.ThumbnailImgPath)
+	v.HlsPath = absolutify(v.HlsPath)
+	v.DashPath = absolutify(v.DashPath)
+	v.PlayreadyPath = absolutify(v.PlayreadyPath)
 }
 
 type Photo struct {
@@ -139,4 +233,7 @@ type Photo struct {
 	OrgImgWidth         int    `json:"orgImgWidth"`
 	OrgImgHeight        int    `json:"orgImgHeight"`
 	DownloadImgFilename string `json:"downloadImgFilename"`
+}
+
+func (p *Photo) absolutify() {
 }

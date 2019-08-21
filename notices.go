@@ -87,5 +87,9 @@ func (g *Geverse) GetNotices(ctx context.Context, communityID int64) ([]Notice, 
 		return nil, errors.New("no notices found")
 	}
 
+	for i := range notices {
+		notices[i].absolutify()
+	}
+
 	return notices, nil
 }
