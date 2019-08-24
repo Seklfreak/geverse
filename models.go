@@ -229,22 +229,22 @@ func (cu *CommunityUser) absolutify() {
 }
 
 type Video struct {
-	ID               int64         `json:"id"`
-	ContentIndex     int           `json:"contentIndex"`
-	Playtime         int           `json:"playtime"`
-	ThumbnailImgPath string        `json:"thumbnailImgPath"`
-	ThumbnailWidth   int           `json:"thumbnailWidth"`
-	ThumbnailHeight  int           `json:"thumbnailHeight"`
-	CommunityID      int64         `json:"communityId"`
-	Status           string        `json:"status"`
-	HlsPath          string        `json:"hlsPath"`
-	DashPath         string        `json:"dashPath"`
-	PlayreadyPath    string        `json:"playreadyPath"`
-	VideoWidth       int           `json:"videoWidth"`
-	VideoHeight      int           `json:"videoHeight"`
-	Level            string        `json:"level"`
-	IsVertical       bool          `json:"isVertical"`
-	CaptionS3Paths   []interface{} `json:"captionS3Paths"` // TODO: example?, probably strings?
+	ID               int64           `json:"id"`
+	ContentIndex     int             `json:"contentIndex"`
+	Playtime         int             `json:"playtime"`
+	ThumbnailImgPath string          `json:"thumbnailImgPath"`
+	ThumbnailWidth   int             `json:"thumbnailWidth"`
+	ThumbnailHeight  int             `json:"thumbnailHeight"`
+	CommunityID      int64           `json:"communityId"`
+	Status           string          `json:"status"`
+	HlsPath          string          `json:"hlsPath"`
+	DashPath         string          `json:"dashPath"`
+	PlayreadyPath    string          `json:"playreadyPath"`
+	VideoWidth       int             `json:"videoWidth"`
+	VideoHeight      int             `json:"videoHeight"`
+	Level            string          `json:"level"`
+	IsVertical       bool            `json:"isVertical"`
+	CaptionS3Paths   []CaptionS3Path `json:"captionS3Paths"`
 }
 
 func (v *Video) absolutify() {
@@ -256,6 +256,22 @@ func (v *Video) absolutify() {
 	v.HlsPath = absolutify(v.HlsPath)
 	v.DashPath = absolutify(v.DashPath)
 	v.PlayreadyPath = absolutify(v.PlayreadyPath)
+	for i := range v.CaptionS3Paths {
+		v.CaptionS3Paths[i].absolutify()
+	}
+}
+
+type CaptionS3Path struct {
+	LanguageCode    string `json:"languageCode"`
+	CaptionFilePath string `json:"captionFilePath"`
+}
+
+func (c *CaptionS3Path) absolutify() {
+	if c == nil {
+		return
+	}
+
+	c.CaptionFilePath = absolutify(c.CaptionFilePath)
 }
 
 type Photo struct {

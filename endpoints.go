@@ -32,10 +32,12 @@ var (
 
 func absolutify(path string) string {
 	if path == "" {
-		return " "
+		return ""
 	}
 
-	if strings.HasPrefix(path, "http") {
+	if strings.HasPrefix(path, "http://") ||
+		strings.HasPrefix(path, "https://") ||
+		strings.HasPrefix(path, "s3://") {
 		return path
 	}
 
