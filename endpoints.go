@@ -14,6 +14,9 @@ var (
 	endpointArtistPosts = func(communityID int64) string {
 		return endpointAPIBaseURL + fmt.Sprintf("v1/stream/community/%d/artistTab", communityID)
 	}
+	endpointArtistMomentPosts = func(communityID, artistID int64) string {
+		return endpointAPIBaseURL + fmt.Sprintf("v1/stream/community/%d/artist/%d/toFans", communityID, artistID)
+	}
 	endpointMediaPosts = func(communityID int64) string {
 		return endpointAPIBaseURL + fmt.Sprintf("v1/stream/community/%d/mediaTab", communityID)
 	}

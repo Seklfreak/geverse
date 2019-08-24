@@ -159,7 +159,7 @@ type Community struct {
 	Fullname              []string `json:"fullname"`
 	ShowMemberCount       bool     `json:"showMemberCount"`
 	FcMember              bool     `json:"fcMember"`
-	MembershipBenifitLink string   `json:"membershipBenefitLink"`
+	MembershipBenefitLink string   `json:"membershipBenefitLink"`
 }
 
 func (c *Community) absolutify() {

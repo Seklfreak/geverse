@@ -21,3 +21,16 @@ func TestGeverse_GetArtistPosts(t *testing.T) {
 		return len(resp.Posts) > 0
 	})
 }
+
+func TestGeverse_GetArtistMoments(t *testing.T) {
+	httpClient := &http.Client{}
+
+	weverseClient := NewGeverse(httpClient, os.Getenv("WEVERSE_TOKEN"))
+
+	resp, err := weverseClient.GetArtistMoments(context.Background(), 3, 18)
+	assert.NoError(t, err)
+	assert.NotNil(t, resp)
+	assert.Condition(t, func() (success bool) {
+		return len(resp.Posts) > 0
+	})
+}
