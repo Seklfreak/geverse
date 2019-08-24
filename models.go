@@ -160,6 +160,8 @@ type Community struct {
 	ShowMemberCount       bool     `json:"showMemberCount"`
 	FcMember              bool     `json:"fcMember"`
 	MembershipBenefitLink string   `json:"membershipBenefitLink"`
+	Artists               []Artist `json:"artists"`
+	Tabs                  []Tab    `json:"tabs"`
 }
 
 func (c *Community) absolutify() {
@@ -170,6 +172,39 @@ func (c *Community) absolutify() {
 	c.HomeBannerImgPath = absolutify(c.HomeBannerImgPath)
 	c.IconImgPath = absolutify(c.IconImgPath)
 	c.BannerImgPath = absolutify(c.BannerImgPath)
+	for i := range c.Artists {
+		c.Artists[i].absolutify()
+	}
+	for i := range c.Tabs {
+		c.Tabs[i].absolutify()
+	}
+}
+
+type Artist struct {
+	ID                  int64  `json:"id"`
+	CommunityUserID     int64  `json:"communityUserId"`
+	Name                string `json:"name"`
+	IsOnline            bool   `json:"isOnline"`
+	ProfileImgPath      string `json:"profileImgPath"`
+	GroupName           string `json:"groupName"`
+	MaxCommentCount     int64  `json:"maxCommentCount"`
+	CommunityID         int64  `json:"communityId"`
+	IsEnabled           bool   `json:"isEnabled"`
+	HasNewToFans        bool   `json:"hasNewToFans"`
+	HasNewPrivateToFans bool   `json:"hasNewPrivateToFans"`
+	ToFanLastID         int64  `json:"toFanLastId"`
+	NameI18N            string `json:"nameI18n"`
+}
+
+func (a *Artist) absolutify() {
+}
+
+type Tab struct {
+	ID   int    `json:"id"`
+	Name string `json:"name"`
+}
+
+func (t *Tab) absolutify() {
 }
 
 type CommunityUser struct {
